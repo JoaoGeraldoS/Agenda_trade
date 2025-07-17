@@ -1,0 +1,27 @@
+from pydantic import BaseModel, Field
+from datetime import datetime
+
+from app.schemas.users.user_schema import TaskUserSchema
+
+
+class ReadTaskSchema(BaseModel):
+    id: int
+    title: str
+    description: str 
+    created_at: datetime
+    concluded: bool
+    user: TaskUserSchema
+
+    model_config = {
+        "from_attributes": True
+    }
+
+class CreateTaskSchema(BaseModel):
+    title: str
+    description: str | None = None
+    concluded: bool = Field(default=False) 
+
+
+    model_config = {
+        "from_attributes": True
+    }
