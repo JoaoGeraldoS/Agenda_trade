@@ -1,5 +1,5 @@
 from fastapi import Depends
-from sqlalchemy.orm import Session, join
+from sqlalchemy.orm import Session
 from sqlalchemy import select
 from app.db.session import get_db
 from app.schemas.tasks.task_schema import CreateTaskSchema
@@ -17,8 +17,11 @@ class TaskService:
         return tasks.scalars().all()
     
     
-    async def read_unique_task(self, id: int):
-        task = self.db.execute(select(Task).where(Task.id == id)).scalars().one_or_none()
+    async def read_unique_task(self, id: int, id_user: int):
+        task = self.db.execute(select(Task)
+                               .where(Task.id == id)
+                               .join(User, User.id == Task.user_id)
+                               .filter(User.id == id_user)).scalars().one_or_none()
 
         if task is None:
             raise erros_exptions.IsNotNoneException("Tarefa não existe")

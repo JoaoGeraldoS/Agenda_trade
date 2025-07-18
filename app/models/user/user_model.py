@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.tasks.task_model import Task
+from app.models.trade.active import Active
 from ..base import Base
 from typing import List
 
@@ -12,4 +13,6 @@ class User(Base):
     username: Mapped[str] = mapped_column(unique=True, nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
 
-    task: Mapped[List["Task"]] = relationship(back_populates="user") 
+    task: Mapped[List["Task"]] = relationship(back_populates="user")
+    active: Mapped[List["Active"]] = relationship(back_populates="user")
+    operations: Mapped[List["Operation"]] = relationship(back_populates="user")

@@ -22,7 +22,7 @@ async def read_task_id(id: int, task_service: TaskService = Depends(), token: ve
     Essa rota faz a leitura de apenas uma tarefa passada pelo id, e retorna um json com ela com o retorno de 200_ok.
     Se a tarefa não existir, tera um retorno 404_not_found
     """
-    return await task_service.read_unique_task(id)
+    return await task_service.read_unique_task(id, token.id)
 
 
 @router.post("/", response_model=ReadTaskSchema, status_code=status.HTTP_201_CREATED)

@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 
-from app.schemas.users.user_schema import TaskUserSchema
+from app.schemas.users.user_schema import UserNameSchema
 
 
 class ReadTaskSchema(BaseModel):
@@ -10,7 +10,7 @@ class ReadTaskSchema(BaseModel):
     description: str 
     created_at: datetime
     concluded: bool
-    user: TaskUserSchema
+    user: UserNameSchema
 
     model_config = {
         "from_attributes": True

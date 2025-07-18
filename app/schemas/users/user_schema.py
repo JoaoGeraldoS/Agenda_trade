@@ -35,5 +35,5 @@ class LoginUserSchema(BaseModel):
         "from_attributes": True
     }
 
-class TaskUserSchema(BaseModel):
+class UserNameSchema(BaseModel):
     name: str
