@@ -20,6 +20,7 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from app.models.tasks.task_model import Task
 from app.models.user.user_model import User
+from app.models.trade.active import Active, Operation
 from app.models.base import Base
 target_metadata = Base.metadata
 
