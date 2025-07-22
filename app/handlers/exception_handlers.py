@@ -1,8 +1,9 @@
 from fastapi import HTTPException, Request, status
 from fastapi.responses import JSONResponse
 from app.exceptions.users import UserExists, UserInvalideCredentials
-from app.exceptions.generic_exeption import NotFound
+from app.exceptions.generic_exeption import NotFound, BadRequest
 from app.exceptions.active import ActiveExists
+
 
 
 async def http_exception_handler(request: Request, exc: HTTPException):
@@ -74,3 +75,15 @@ async def user_invalid_credentials_handler(request: Request, exc: UserInvalideCr
         }
     )
 
+async def operation_handler(request: Request, exc: BadRequest):
+    return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content= {
+            "error": {
+                "status_code": status.HTTP_400_BAD_REQUEST,
+                "detail": exc.message,
+                "path": str(request.url.path),
+                "method": request.method
+            }
+        }
+    )

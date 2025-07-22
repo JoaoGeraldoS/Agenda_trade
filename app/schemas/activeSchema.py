@@ -24,3 +24,10 @@ class ActiveSchema(BaseModel):
     model_config = {
         "from_attributes": True
     }
+
+class ActiveOperation(BaseModel):
+    name: str
+
+    model_config ={
+        "from_attributes": True
+    }
