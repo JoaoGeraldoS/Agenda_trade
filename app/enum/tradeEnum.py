@@ -7,3 +7,9 @@ class Order(Enum):
 class StatusTrade(Enum):
     ABERTA = "ABERTA"
     FECHADA = "FECHADA"
+
+class EmotionalsEnum(Enum):
+    TRANQUILO = "TRANQUILO"
+    ANCIOSO = "ANCIOSO"
+    CONFIANTE = "CONFIANTE"
+    DEPRESSIVO = "DEPRESSIVO"

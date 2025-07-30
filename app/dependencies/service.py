@@ -3,6 +3,7 @@ from app.repositories.usersRepository import UserRepository
 from app.repositories.taskRepository import TaskRepository
 from app.repositories.activeRepository import ActiveRepository
 from app.repositories.operationRepository import OperationRepository
+from app.repositories.evaluationRepository import EvaluationRepository
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
@@ -10,6 +11,7 @@ from app.services.userService import UserService
 from app.services.taskService import TaskService
 from app.services.activeService import ActiveService
 from app.services.operation_service import OperationService
+from app.services.evaluationService import EvaluationService
 
 def get_user_service(db: Session = Depends(get_db)) -> UserService:
     user_repo = UserRepository(db)
@@ -27,3 +29,7 @@ def get_active_service(db: Session = Depends(get_db)) -> ActiveService:
 def get_op_service(db: Session = Depends(get_db)) -> OperationService:
     operation_repo = OperationRepository(db)
     return OperationService(operation_repo)
+
+def get_eval_service(db: Session = Depends(get_db)) -> EvaluationService:
+    evaluation_repo = EvaluationRepository(db)
+    return EvaluationService(evaluation_repo)

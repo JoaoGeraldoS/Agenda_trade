@@ -19,12 +19,12 @@ class ReadOperationSchema(BaseModel):
 
 
     model_config = {
-        "from_attributes": True,
-        "json_encoders": {
-            datetime: lambda v:(
-                v.replace(tzinfo=ZoneInfo("UTC")) if v.tzinfo is None else v
-            ).astimezone(ZoneInfo("America/Sao_Paulo")).strftime("%d/%m/%Y")
-        }
+        "from_attributes": True
+        # "json_encoders": {
+        #     datetime: lambda v:(
+        #         v.replace(tzinfo=ZoneInfo("America/Sao_Paulo")) if v.tzinfo is None else v
+        #     ).astimezone(ZoneInfo("America/Sao_Paulo")).strftime("%d/%m/%Y")
+        # }
     }
 
 

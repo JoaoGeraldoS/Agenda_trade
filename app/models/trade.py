@@ -2,7 +2,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, Enum, func, String
 from datetime import datetime
 from app.core.dataBase import Base
-from app.enum.tradeEnum import Order, StatusTrade
+from app.enum.tradeEnum import Order, StatusTrade, EmotionalsEnum
 from typing import List
 
 class Active(Base):
@@ -34,3 +34,19 @@ class Operation(Base):
 
     active: Mapped["Active"] = relationship(back_populates="operations")
     user: Mapped["User"] = relationship(back_populates="operations")
+    evaluation: Mapped["Evaluation"] = relationship(back_populates="operations")
+
+
+class Evaluation(Base):
+    __tablename__ = "evaluations"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    emotional: Mapped[str] = mapped_column(Enum(EmotionalsEnum), default=EmotionalsEnum.TRANQUILO)
+    reason_for_entry: Mapped[str] = mapped_column(nullable=False)
+    rules_respected: Mapped[bool] = mapped_column(nullable=False)
+    committed_error: Mapped[str]
+    operation_id: Mapped[int] = mapped_column(ForeignKey("operations.id"))
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+
+    operations: Mapped["Operation"] = relationship(back_populates="evaluation")
+    user: Mapped["User"] = relationship(back_populates="evaluation")

@@ -13,3 +13,4 @@ class User(Base):
     task: Mapped[List["Task"]] = relationship(back_populates="user")
     active: Mapped[List["Active"]] = relationship(back_populates="user")
     operations: Mapped[List["Operation"]] = relationship(back_populates="user")
+    evaluation: Mapped["Evaluation"] = relationship(back_populates="user")
